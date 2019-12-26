@@ -359,8 +359,8 @@ int graphics_setup(void)
 		sdl_window = SDL_CreateWindow("Amiberry",
 			SDL_WINDOWPOS_CENTERED,
 			SDL_WINDOWPOS_CENTERED,
-			800,
-			480,
+			1920,
+			1080,
 			sdl_window_mode);
 		check_error_sdl(sdl_window == nullptr, "Unable to create window:");		
 	}

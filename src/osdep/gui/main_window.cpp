@@ -752,6 +752,44 @@ void checkInput()
 				}
 			break;
 
+			case SDL_FINGERDOWN: {
+				SDL_Event event2;
+				memcpy(&event2, &gui_event, sizeof(gui_event));
+				event2.type = SDL_MOUSEBUTTONDOWN;
+				event2.button.which = 0;
+				event2.button.button = SDL_BUTTON_LEFT;
+				event2.button.state = SDL_PRESSED;
+				event2.button.x = gui_graphics->getTarget()->w * gui_event.tfinger.x;
+				event2.button.y = gui_graphics->getTarget()->h * gui_event.tfinger.y;
+				gui_input->pushInput(event2);
+			}
+				break;
+
+			case SDL_FINGERUP: {
+				SDL_Event event2;
+				memcpy(&event2, &gui_event, sizeof(gui_event));
+				event2.type = SDL_MOUSEBUTTONUP;
+				event2.button.which = 0;
+				event2.button.button = SDL_BUTTON_LEFT;
+				event2.button.state = SDL_RELEASED;
+				event2.button.x = gui_graphics->getTarget()->w * gui_event.tfinger.x;
+				event2.button.y = gui_graphics->getTarget()->h * gui_event.tfinger.y;
+				gui_input->pushInput(event2);
+			}
+				break;
+
+			case SDL_FINGERMOTION: {
+				SDL_Event event2;
+				memcpy(&event2, &gui_event, sizeof(gui_event));
+				event2.type = SDL_MOUSEMOTION;
+				event2.motion.which = 0;
+				event2.motion.state = 0;
+				event2.motion.x = gui_graphics->getTarget()->w * gui_event.tfinger.x;
+				event2.motion.y = gui_graphics->getTarget()->h * gui_event.tfinger.y;
+				gui_input->pushInput(event2);
+			}
+				break;
+
 		default:
 			break;
 		}
