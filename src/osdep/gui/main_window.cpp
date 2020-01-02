@@ -22,10 +22,8 @@
 
 #include "inputdevice.h"
 
-#if defined(ANDROID)
+#ifdef ANDROID
 #include "androidsdl_event.h"
-//#include <SDL_screenkeyboard.h>
-//#include <SDL_android.h>
 #include <android/log.h>
 #endif
 
@@ -86,9 +84,6 @@ ConfigCategory categories[] = {
 		"Savestates", "data/savestate.png", nullptr, nullptr, InitPanelSavestate, ExitPanelSavestate,
 		RefreshPanelSavestate, HelpPanelSavestate
 	},
-#ifdef ANDROID
-	{ "OnScreen",         "data/screen.ico",    NULL, NULL, InitPanelOnScreen,  ExitPanelOnScreen, RefreshPanelOnScreen,  HelpPanelOnScreen },
-#endif
 	{nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr}
 };
 
@@ -110,9 +105,6 @@ enum
 	PANEL_CUSTOM,
 	PANEL_MISC,
 	PANEL_SAVESTATES,
-#ifdef ANDROID
-	PANEL_ONSCREEN,
-#endif
 	NUM_PANELS
 };
 
@@ -1173,12 +1165,6 @@ void DisableResume()
 
 void run_gui()
 {
-#if 0
-#ifdef ANDROID
-	SDL_ANDROID_SetScreenKeyboardShown(0);
-	SDL_ANDROID_SetSystemMousePointerVisible(1);
-#endif
-#endif
 	gui_running = true;
 	gui_rtarea_flags_onenter = gui_create_rtarea_flag(&currprefs);
 
@@ -1198,15 +1184,6 @@ void run_gui()
 		amiberry_gui_run();
 		gui_widgets_halt();
 		amiberry_gui_halt();
-#if 0
-#ifdef ANDROID
-		if (currprefs.onScreen != 0)
-		{
-			SDL_ANDROID_SetScreenKeyboardShown(1);
-			SDL_ANDROID_SetSystemMousePointerVisible(0);
-		}
-#endif
-#endif
 	}
 
 	// Catch all GUI framework exceptions.

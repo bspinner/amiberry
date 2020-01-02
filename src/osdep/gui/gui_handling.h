@@ -139,13 +139,6 @@ void ExitPanelSavestate(void);
 void RefreshPanelSavestate(void);
 bool HelpPanelSavestate(std::vector<std::string>& helptext);
 
-#ifdef ANDROID
-void InitPanelOnScreen(const struct _ConfigCategory& category);
-void ExitPanelOnScreen(void);
-void RefreshPanelOnScreen(void);
-bool HelpPanelOnScreen(std::vector<std::string> &helptext);
-#endif
-
 void RefreshAllPanels(void);
 void RegisterRefreshFunc(void (*func)(void));
 

@@ -419,39 +419,6 @@ void target_default_options(struct uae_prefs* p, int type)
 	p->use_retroarch_menu = true;
 	p->use_retroarch_reset = false;
 
-#ifdef ANDROID
-	p->onScreen = 1;
-	p->onScreen_textinput = 1;
-	p->onScreen_dpad = 1;
-	p->onScreen_button1 = 1;
-	p->onScreen_button2 = 1;
-	p->onScreen_button3 = 1;
-	p->onScreen_button4 = 1;
-	p->onScreen_button5 = 0;
-	p->onScreen_button6 = 0;
-	p->custom_position = 0;
-	p->pos_x_textinput = 0;
-	p->pos_y_textinput = 0;
-	p->pos_x_dpad = 4;
-	p->pos_y_dpad = 215;
-	p->pos_x_button1 = 430;
-	p->pos_y_button1 = 286;
-	p->pos_x_button2 = 378;
-	p->pos_y_button2 = 286;
-	p->pos_x_button3 = 430;
-	p->pos_y_button3 = 214;
-	p->pos_x_button4 = 378;
-	p->pos_y_button4 = 214;
-	p->pos_x_button5 = 430;
-	p->pos_y_button5 = 142;
-	p->pos_x_button6 = 378;
-	p->pos_y_button6 = 142;
-	p->extfilter = 1;
-	p->quickSwitch = 0;
-	p->floatingJoystick = 0;
-	p->disableMenuVKeyb = 0;
-#endif
-
 	p->cr[CHIPSET_REFRESH_PAL].locked = true;
 	p->cr[CHIPSET_REFRESH_PAL].vsync = 1;
 
@@ -488,37 +455,6 @@ void target_save_options(struct zfile* f, struct uae_prefs* p)
 	cfgfile_write_bool(f, _T("amiberry.use_retroarch_quit"), p->use_retroarch_quit);
 	cfgfile_write_bool(f, _T("amiberry.use_retroarch_menu"), p->use_retroarch_menu);
 	cfgfile_write_bool(f, _T("amiberry.use_retroarch_reset"), p->use_retroarch_reset);
-
-#ifdef ANDROID
-	cfgfile_write(f, "amiberry.onscreen", "%d", p->onScreen);
-	cfgfile_write(f, "amiberry.onscreen_textinput", "%d", p->onScreen_textinput);
-	cfgfile_write(f, "amiberry.onscreen_dpad", "%d", p->onScreen_dpad);
-	cfgfile_write(f, "amiberry.onscreen_button1", "%d", p->onScreen_button1);
-	cfgfile_write(f, "amiberry.onscreen_button2", "%d", p->onScreen_button2);
-	cfgfile_write(f, "amiberry.onscreen_button3", "%d", p->onScreen_button3);
-	cfgfile_write(f, "amiberry.onscreen_button4", "%d", p->onScreen_button4);
-	cfgfile_write(f, "amiberry.onscreen_button5", "%d", p->onScreen_button5);
-	cfgfile_write(f, "amiberry.onscreen_button6", "%d", p->onScreen_button6);
-	cfgfile_write(f, "amiberry.custom_position", "%d", p->custom_position);
-	cfgfile_write(f, "amiberry.pos_x_textinput", "%d", p->pos_x_textinput);
-	cfgfile_write(f, "amiberry.pos_y_textinput", "%d", p->pos_y_textinput);
-	cfgfile_write(f, "amiberry.pos_x_dpad", "%d", p->pos_x_dpad);
-	cfgfile_write(f, "amiberry.pos_y_dpad", "%d", p->pos_y_dpad);
-	cfgfile_write(f, "amiberry.pos_x_button1", "%d", p->pos_x_button1);
-	cfgfile_write(f, "amiberry.pos_y_button1", "%d", p->pos_y_button1);
-	cfgfile_write(f, "amiberry.pos_x_button2", "%d", p->pos_x_button2);
-	cfgfile_write(f, "amiberry.pos_y_button2", "%d", p->pos_y_button2);
-	cfgfile_write(f, "amiberry.pos_x_button3", "%d", p->pos_x_button3);
-	cfgfile_write(f, "amiberry.pos_y_button3", "%d", p->pos_y_button3);
-	cfgfile_write(f, "amiberry.pos_x_button4", "%d", p->pos_x_button4);
-	cfgfile_write(f, "amiberry.pos_y_button4", "%d", p->pos_y_button4);
-	cfgfile_write(f, "amiberry.pos_x_button5", "%d", p->pos_x_button5);
-	cfgfile_write(f, "amiberry.pos_y_button5", "%d", p->pos_y_button5);
-	cfgfile_write(f, "amiberry.pos_x_button6", "%d", p->pos_x_button6);
-	cfgfile_write(f, "amiberry.pos_y_button6", "%d", p->pos_y_button6);
-	cfgfile_write(f, "amiberry.floating_joystick", "%d", p->floatingJoystick);
-	cfgfile_write(f, "amiberry.disable_menu_vkeyb", "%d", p->disableMenuVKeyb);
-#endif
 }
 
 void target_restart(void)
@@ -538,40 +474,6 @@ TCHAR* target_expand_environment(const TCHAR* path, TCHAR* out, int maxlen)
 
 int target_parse_option(struct uae_prefs* p, const char* option, const char* value)
 {
-#ifdef ANDROID
-	int result = (cfgfile_intval(option, value, "onscreen", &p->onScreen, 1)
-		|| cfgfile_intval(option, value, "onscreen_textinput", &p->onScreen_textinput, 1)
-		|| cfgfile_intval(option, value, "onscreen_dpad", &p->onScreen_dpad, 1)
-		|| cfgfile_intval(option, value, "onscreen_button1", &p->onScreen_button1, 1)
-		|| cfgfile_intval(option, value, "onscreen_button2", &p->onScreen_button2, 1)
-		|| cfgfile_intval(option, value, "onscreen_button3", &p->onScreen_button3, 1)
-		|| cfgfile_intval(option, value, "onscreen_button4", &p->onScreen_button4, 1)
-		|| cfgfile_intval(option, value, "onscreen_button5", &p->onScreen_button5, 1)
-		|| cfgfile_intval(option, value, "onscreen_button6", &p->onScreen_button6, 1)
-		|| cfgfile_intval(option, value, "custom_position", &p->custom_position, 1)
-		|| cfgfile_intval(option, value, "pos_x_textinput", &p->pos_x_textinput, 1)
-		|| cfgfile_intval(option, value, "pos_y_textinput", &p->pos_y_textinput, 1)
-		|| cfgfile_intval(option, value, "pos_x_dpad", &p->pos_x_dpad, 1)
-		|| cfgfile_intval(option, value, "pos_y_dpad", &p->pos_y_dpad, 1)
-		|| cfgfile_intval(option, value, "pos_x_button1", &p->pos_x_button1, 1)
-		|| cfgfile_intval(option, value, "pos_y_button1", &p->pos_y_button1, 1)
-		|| cfgfile_intval(option, value, "pos_x_button2", &p->pos_x_button2, 1)
-		|| cfgfile_intval(option, value, "pos_y_button2", &p->pos_y_button2, 1)
-		|| cfgfile_intval(option, value, "pos_x_button3", &p->pos_x_button3, 1)
-		|| cfgfile_intval(option, value, "pos_y_button3", &p->pos_y_button3, 1)
-		|| cfgfile_intval(option, value, "pos_x_button4", &p->pos_x_button4, 1)
-		|| cfgfile_intval(option, value, "pos_y_button4", &p->pos_y_button4, 1)
-		|| cfgfile_intval(option, value, "pos_x_button5", &p->pos_x_button5, 1)
-		|| cfgfile_intval(option, value, "pos_y_button5", &p->pos_y_button5, 1)
-		|| cfgfile_intval(option, value, "pos_x_button6", &p->pos_x_button6, 1)
-		|| cfgfile_intval(option, value, "pos_y_button6", &p->pos_y_button6, 1)
-		|| cfgfile_intval(option, value, "floating_joystick", &p->floatingJoystick, 1)
-		|| cfgfile_intval(option, value, "disable_menu_vkeyb", &p->disableMenuVKeyb, 1)
-		);
-	if (result)
-		return 1;
-#endif
-
 	if (cfgfile_yesno(option, value, _T("use_retroarch_quit"), &p->use_retroarch_quit))
 		return 1;
 	if (cfgfile_yesno(option, value, _T("use_retroarch_menu"), &p->use_retroarch_menu))

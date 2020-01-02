@@ -11,12 +11,6 @@
 #include "gui_handling.h"
 #include "inputdevice.h"
 
-#if 0
-#ifdef ANDROID
-#include <SDL_android.h>
-#endif
-#endif
-
 static const char* mousespeed_list[] = {".25", ".5", "1x", "2x", "4x"};
 static const int mousespeed_values[] = {2, 5, 10, 20, 40};
 
@@ -240,14 +234,6 @@ public:
 
 		else if (actionEvent.getSource() == chkMouseHack)
 		{
-#if 0
-#ifdef ANDROID
-			if (chkMouseHack->isSelected())
-				SDL_ANDROID_SetMouseEmulationMode(0, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1);
-			else
-				SDL_ANDROID_SetMouseEmulationMode(1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1);
-#endif
-#endif
 			changed_prefs.input_tablet = chkMouseHack->isSelected() ? TABLET_MOUSEHACK : TABLET_OFF;
 		}
 	}

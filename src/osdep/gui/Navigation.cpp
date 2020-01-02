@@ -38,13 +38,6 @@ static NavigationMap navMap[] =
 	{"Input", "cboPort0mode", "cboPort0", "Sound", "Custom controls"},
 	{"Custom controls", "Right Trigger", "0: Mouse", "Input", "Miscellaneous"},
 	{"Miscellaneous", "StatusLine", "StatusLine", "Custom controls", "Savestates"},
-#ifdef ANDROID
-{ "Savestates",       "State0",         "State0",         "Miscellaneous",  "OnScreen" },
-{ "OnScreen",         "OnScrButton3",   "OnScrCtrl",      "Savestates",     "Shutdown" },
-{ "Quit",             "Start",          "Help",           "OnScreen",       "Paths" },
-{ "Help",             "Quit",           "Start",          "OnScreen",       "Paths" },
-{ "Start",            "Help",           "Quit",           "OnScreen",       "Paths" },
-#else
 	{"Savestates", "State0", "State0", "Miscellaneous", "Shutdown"},
 	{"Shutdown", "Start", "Quit", "Savestates", "Paths"},
 	{"Quit", "Shutdown", "Restart", "Savestates", "Paths"},
@@ -52,7 +45,6 @@ static NavigationMap navMap[] =
 	{"Help", "Restart", "Reset", "Savestates", "Paths"},
 	{"Reset", "Help", "Start", "Savestates", "Paths"},
 	{"Start", "Reset", "Shutdown", "Savestates", "Paths"},
-#endif
 
 	// PanelPaths
 	{"SystemROMs", "Paths", "Paths", "RescanROMs", "ConfigPath"},
@@ -300,22 +292,6 @@ static NavigationMap navMap[] =
 	{"State3", "Savestates", "Savestates", "State2", "LoadState"},
 	{"LoadState", "Savestates", "SaveState", "State3", "State0"},
 	{"SaveState", "LoadState", "Savestates", "State3", "State0"},
-
-#ifdef ANDROID
-// PanelOnScreen
-{ "OnScrCtrl",      "OnScreen",       "OnScrButton3", "DisableMenuVKeyb", "OnScrTextInput" },
-{ "OnScrButton3",   "OnScrCtrl",      "OnScreen",     "CustomPos",     "OnScrButton4" },
-{ "OnScrTextInput", "OnScreen",       "OnScrButton4", "OnScrCtrl",      "OnScrDpad" },
-{ "OnScrButton4",   "OnScrTextInput", "OnScreen",     "OnScrButton3",   "OnScrButton5" },
-{ "OnScrDpad",      "OnScreen",       "OnScrButton5", "OnScrTextInput", "OnScrButton1" },
-{ "OnScrButton5",   "OnScrDpad",      "OnScreen",     "OnScrButton4",   "OnScrButton6" },
-{ "OnScrButton1",   "OnScreen",       "OnScrButton6", "OnScrDpad",      "OnScrButton2" },
-{ "OnScrButton6",   "OnScrButton1",   "OnScreen",     "OnScrButton5",   "CustomPos" },
-{ "OnScrButton2",   "OnScreen",       "CustomPos",    "OnScrButton1",   "FloatJoy" },
-{ "CustomPos",      "OnScrButton2",   "OnScreen",     "OnScrButton6",   "Reset" },
-{ "FloatJoy",       "OnScreen",       "CustomPos",    "OnScrButton2",   "DisableMenuVKeyb" },
-{ "DisableMenuVKeyb","OnScreen",       "CustomPos",    "FloatJoy",       "Shutdown" },
-#endif
 
 	//  active            move left         move right        move up           move down
 	// EditFilesysVirtual
